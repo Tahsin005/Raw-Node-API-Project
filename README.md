@@ -1,4 +1,3 @@
-# Raw-Node-API-Project
 <p align="center">
   <h2 align="center">Uptime Monitoring API using Node.js</h3>
 
