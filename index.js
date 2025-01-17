@@ -16,9 +16,9 @@ const app = {};
 
 // testing file system
 // TODO: will remove it later
-data.create('test', 'newFile', {'name': 'Bangladesh', 'language': 'Bangla'}, (err) => {
+data.read('test', 'newFile', (err, data) => {
     if (!err) {
-        console.log('File created successfully.');
+        console.log('File read successfully.', data);
     } else {
         console.log(err);
     }
