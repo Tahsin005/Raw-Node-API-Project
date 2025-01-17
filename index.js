@@ -16,13 +16,13 @@ const app = {};
 
 // testing file system
 // TODO: will remove it later
-data.read('test', 'newFile', (err, data) => {
+data.update('test', 'newFile', { name: 'China', language: 'Chinese' }, (err) => {
     if (!err) {
-        console.log('File read successfully.', data);
+        console.log('File updated successfully.');
     } else {
         console.log(err);
     }
-})
+});
 
 // create server
 app.createServer = () => {
