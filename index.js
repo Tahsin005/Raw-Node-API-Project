@@ -9,20 +9,10 @@
 const http = require('http');
 const { handleReqRes } = require('./helpers/handleReqRes');
 const environment = require('./helpers/environments');
-const data = require('./lib/data');
+// const data = require('./lib/data');
 
 // app object - module scafoldiing
 const app = {};
-
-// testing file system
-// TODO: will remove it later
-// data.delete('test', 'newFile', (err) => {
-//     if (!err) {
-//         console.log('File deleted successfully.');
-//     } else {
-//         console.log(err);
-//     }
-// });
 
 // create server
 app.createServer = () => {
