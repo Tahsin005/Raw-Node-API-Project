@@ -16,9 +16,9 @@ const app = {};
 
 // testing file system
 // TODO: will remove it later
-data.update('test', 'newFile', { name: 'China', language: 'Chinese' }, (err) => {
+data.delete('test', 'newFile', (err) => {
     if (!err) {
-        console.log('File updated successfully.');
+        console.log('File deleted successfully.');
     } else {
         console.log(err);
     }
