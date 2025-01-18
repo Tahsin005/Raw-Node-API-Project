@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /*
  * Title: handle Request Response
  * Description: Handle Request Response
@@ -17,7 +18,7 @@ const handler = {};
 handler.handleReqRes = (req, res) => {
     // request handle
     // get the url and parse it
-    const parsedurl = url.parse(req.url);
+    const parsedurl = url.parse(req.url, true);
     const path = parsedurl.pathname;
     const trimmedPath = path.replace(/^\/+|\/+$/g, '');
     const method = req.method.toLowerCase();
