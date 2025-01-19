@@ -25,17 +25,9 @@ handler.tokenHandler = (requestProperties, callback) => {
 handler._token = {};
 
 handler._token.post = (requestProperties, callback) => {
-    const phone =
-        typeof requestProperties.body.phone === 'string' &&
-        requestProperties.body.phone.trim().length === 11
-            ? requestProperties.body.phone
-            : false;
+    const phone = typeof requestProperties.body.phone === 'string' && requestProperties.body.phone.trim().length === 11 ? requestProperties.body.phone : false;
 
-    const password =
-        typeof requestProperties.body.password === 'string' &&
-        requestProperties.body.password.trim().length > 0
-            ? requestProperties.body.password
-            : false;
+    const password = typeof requestProperties.body.password === 'string' && requestProperties.body.password.trim().length > 0 ? requestProperties.body.password : false;
 
     if (phone && password) {
         // lookup the user
@@ -47,7 +39,7 @@ handler._token.post = (requestProperties, callback) => {
                 const tokenObject = {
                     phone,
                     expires,
-                    'id': tokenId,
+                    id: tokenId,
                 };
 
                 // store the token
@@ -57,7 +49,7 @@ handler._token.post = (requestProperties, callback) => {
                     } else {
                         callback(500, { error: 'There was a problem in the server.' });
                     }
-                })
+                });
             } else {
                 callback(401, { error: 'Password is not valid.' });
             }
@@ -68,15 +60,27 @@ handler._token.post = (requestProperties, callback) => {
 };
 
 handler._token.get = (requestProperties, callback) => {
+    // check if id is valid
+    const id = typeof requestProperties.queryStringObject.id === 'string' && requestProperties.queryStringObject.id.trim().length === 20 ? requestProperties.queryStringObject.id.trim() : false;
 
+
+    if (id) {
+        // lookup the token
+        data.read('tokens', id, (err, tokenData) => {
+            const token = { ...parseJSON(tokenData) };
+            if (!err && token) {
+                callback(200, token);
+            } else {
+                callback(404, { error: 'Requested token was not found...' });
+            }
+        });
+    } else {
+        callback(404, { error: 'Requested token was not found.' });
+    }
 };
 
-handler._token.put = (requestProperties, callback) => {
+handler._token.put = (requestProperties, callback) => {};
 
-};
-
-handler._token.delete = (requestProperties, callback) => {
-
-};
+handler._token.delete = (requestProperties, callback) => {};
 
 module.exports = handler;
