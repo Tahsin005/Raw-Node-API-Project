@@ -10,9 +10,15 @@ const http = require('http');
 const { handleReqRes } = require('./helpers/handleReqRes');
 const environment = require('./helpers/environments');
 // const data = require('./lib/data');
+const { sendTwilioSms } = require('./helpers/notifications')
 
 // app object - module scafoldiing
 const app = {};
+
+// @TODO: remove letter
+sendTwilioSms('01795368447', 'Hello, Tahsin, This message is from the raw node js application', (err) => {
+    console.log(err);
+});
 
 // create server
 app.createServer = () => {
