@@ -109,7 +109,29 @@ handler._check.post = (requestProperties, callback) => {
 };
 
 handler._check.get = (requestProperties, callback) => {
+    const id = typeof requestProperties.queryStringObject.id === 'string' && requestProperties.queryStringObject.id.trim().length === 20 ? requestProperties.queryStringObject.id : false;
 
+    if (id) {
+        // look up the check
+        data.read('checks', id, (err, checkData) => {
+            if (!err && checkData) {
+                const token = typeof requestProperties.headersObject.token === 'string' ? requestProperties.headersObject.token : false;
+
+                // verify the token
+                tokenHandler._token.verify(token, parseJSON(checkData).userPhone, (tokenIsValid) => {
+                    if (tokenIsValid) {
+                        callback(200, parseJSON(checkData));
+                    } else {
+                        callback(403, { error: 'Authentication failure' });
+                    }
+                });
+            } else {
+                callback(5000, { error: 'You have a problem in your request' });
+            }
+        });
+    } else {
+        callback(400, { error: 'You have a problem in your request' });
+    }
 };
 
 handler._check.put = (requestProperties, callback) => {
