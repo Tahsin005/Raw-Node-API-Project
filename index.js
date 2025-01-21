@@ -1,35 +1,28 @@
 /*
- * Title: Uptime Monitoring Application
- * Description: A RESTful API to monitor up or down time of user defined links
+ * Title: Project nitial file
+ * Description: Initial file to start the server and workers
  * Author: MD. Tahsin Ferdous
- * Date: 15/01/2025
+ * Date: 21/01/2025
  */
 
 // dependencies
-const http = require('http');
-const { handleReqRes } = require('./helpers/handleReqRes');
-const environment = require('./helpers/environments');
-// const data = require('./lib/data');
-const { sendTwilioSms } = require('./helpers/notifications')
+const server = require('./lib/server');
+const workers = require('./lib/worker');
+const { sendTwilioSms } = require('./helpers/notifications');
 
 // app object - module scafoldiing
 const app = {};
 
-// @TODO: remove letter
-sendTwilioSms('01795368447', 'Hello, Tahsin, This message is from the raw node js application', (err) => {
-    console.log(err);
-});
+app.init = () => {
+    // start the server
+    server.init();
 
-// create server
-app.createServer = () => {
-    const server = http.createServer(app.handleReqRes);
-    server.listen(environment.port, () => {
-        console.log(`listening on port ${environment.port}.....`);
-    });
+    // start the workers
+    workers.init();
 };
 
-// handle request response
-app.handleReqRes = handleReqRes;
+// execute
+app.init();
 
-// start the server
-app.createServer();
+// export the app
+module.exports = app;

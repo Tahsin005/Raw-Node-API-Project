@@ -15,8 +15,9 @@ const notifications = {};
 
 // send sms to user using twilio api
 notifications.sendTwilioSms = (phone, msg, callback) => {
-    // input validations
+    // input validation
     const userPhone = typeof phone === 'string' && phone.trim().length === 11 ? phone.trim() : false;
+
     const userMsg = typeof msg === 'string' && msg.trim().length > 0 && msg.trim().length <= 1600 ? msg.trim() : false;
 
     if (userPhone && userMsg) {
@@ -28,7 +29,7 @@ notifications.sendTwilioSms = (phone, msg, callback) => {
         };
 
         // stringify the payload
-        const stringifyPayLoad = querystring.stringify(payload);
+        const stringifyPayload = querystring.stringify(payload);
 
         // configure the request details
         const requestDetails = {
@@ -57,7 +58,8 @@ notifications.sendTwilioSms = (phone, msg, callback) => {
             callback(e);
         });
 
-        req.write(stringifyPayLoad);
+        req.write(stringifyPayload);
+
         req.end();
     } else {
         callback('Given parameters were missing or invalid!');

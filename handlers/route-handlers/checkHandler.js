@@ -36,6 +36,8 @@ handler._check.post = (requestProperties, callback) => {
 
     const timeoutSeconds = typeof requestProperties.body.timeoutSeconds === 'number' && requestProperties.body.timeoutSeconds % 1 === 0 && requestProperties.body.timeoutSeconds >= 1 && requestProperties.body.timeoutSeconds <= 5 ? requestProperties.body.timeoutSeconds : false;
 
+    console.log(protocol, url, method, timeoutSeconds, successCodes);
+
     if (protocol && url && method && successCodes && timeoutSeconds) {
         const token = typeof requestProperties.headersObject.token === 'string' ? requestProperties.headersObject.token : false;
 
