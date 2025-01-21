@@ -1,1 +1,1 @@
-{"id":"gvaj39mhau8qe9r0vf4r","userPhone":"01795368447","protocol":"http","url":"google.com","method":"get","successCodes":[200,201],"timeoutSeconds":2}
+{"id":"gvaj39mhau8qe9r0vf4r","userPhone":"01795368447","protocol":"https","url":"google.com","method":"GET","successCodes":[200,201],"timeoutSeconds":2}
